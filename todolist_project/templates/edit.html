@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ToDo List App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+    body {
+    background-color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode','Lucida Sans','Lucida Grande','Arial', 'Sans-Serif';
+}
+</style>
+
+</head>
+
+<body>
+    <div>
+        <h1 class="text-center mt-5">Please edit your task below</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                <form action="/edit/{{ index0 }}" method="post" class="mt-3">
+                    <div class="input-group">
+                        <input name ='updated_item' value="{{ item }}" type="text" placeholder="Enter text to edit" class='form-control'>
+                        <input name='updated_date' value="{{date}}" type="date" class="form-control">
+                        <button class='btn btn-success ml-3' type="submit">Edit</button>
+                        <a href="{{url_for('index')}}"  class="btn btn-info ml-3">Back</a>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        {% if error2 %}
+            <p>{{error2}}</p>
+        {% endif %}
+
+        {% if info2 %}
+            <p>{{ info2 }}</p>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

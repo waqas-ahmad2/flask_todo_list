@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ToDo List App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+body {
+    background-color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode','Lucida Sans','Lucida Grande','Arial', 'Sans-Serif';
+}
+
+
+</style>
+
+
+</head>
+
+<body>
+<div>
+    <h1 class="text-center mt-5">Todo List Flask App</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <form action="/add" class="mt-3 p-4 border rounded border-dark border-1" method="post">
+                    <div class="input-group">
+                        <input name="item" class="form-control w-50" required type="text" placeholder="Enter text">
+                        <input name="date" class="form-control" required type="date">
+                        <button type="submit" class="btn btn-success ml-3">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="text-center mt-1">
+        {% if info %}
+            <p>{{info}}</p>
+
+        {% elif confirm%}
+            <p>{{confirm}}</p>
+
+        {% else %}
+            <p>{{error}}</p>
+
+        {% endif %}
+
+    </div>
+
+    <!--showing list on screen-->
+    <div>
+        <h2 class="text-center">Todo's</h2>
+        <div class="container">
+            <ol class="list-group">
+            {% for i in message %}
+                <li class="list-group-item  justify-content-between">
+                    <div class="row">
+                        <div class="col-8 text-left" >
+                            <input type="checkbox" name="status" {% if i['Status'] %} checked {% endif %} disabled onchange = this.form.submit()>
+                            <!--usng span so that anchor tags dont get strikethrough-->
+                            <span  {% if i['Status'] %} style= "text-decoration:line-through; color:grey" {%endif%} disabled> {{i['Task']}} </span>
+                            <br>
+                            <span {%if i['Status']%} style="text-decoration:line-through; color:grey;" disabled {%endif%}>Due Date:  {{i['Date']}}</span>
+
+                        </div>
+                        <div class="col-4 text-right" >
+                            <a href="{{ url_for('done',index0=loop.index0) }}" class="btn btn-success">Done</a>
+                            <a href="{{ url_for('edit', index0=loop.index0) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ url_for('delete', index0=loop.index0) }}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>
